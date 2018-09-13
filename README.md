@@ -2,6 +2,10 @@
 
 Bare bones template for getting up and running with Set.
 
+Documentation for building with Set can be found here:
+
+### [Set Dev Tools Documentation](https://docs.setprotocol.com/)
+
 ## Getting Started
 
 Clone down the repo, navigate inside, and install dependencies
@@ -18,6 +22,3 @@ yarn start
 
 View your local server at `http://localhost:3000/`
 
-Documentation for building with Set can be found here:
-
-## [Documentation](https://docs.setprotocol.com/)
