@@ -33,10 +33,11 @@ class App extends Component {
       createdSetLink: '',
     };
     this.createSet = this.createSet.bind(this);
+    this.getAccount = this.getAccount.bind(this);
   }
 
   async createSet() {
-    const { setProtocol, web3 } = this.state;
+    const { setProtocol } = this.state;
 
     /**
       * Steps to create your own Set Token
@@ -54,7 +55,7 @@ class App extends Component {
     const naturalUnit = new BigNumber(10);
     const name = 'My Set';
     const symbol = 'MS';
-    const account = web3.eth.accounts[0];
+    const account = this.getAccount();
     const txOpts = {
       from: account,
       gas: 4000000,
@@ -94,6 +95,12 @@ class App extends Component {
 
     // Tutorial Link: https://docs.setprotocol.com/tutorials#issuing-a-set
     // TODO: Insert your code here
+  }
+
+  getAccount() {
+    const { web3 } = this.state;
+    if (web3.eth.accounts[0]) return web3.eth.accounts[0];
+    throw new Error('Your MetaMask is locked. Unlock it to continue.');
   }
 
   renderEtherScanLink(link, content) {
