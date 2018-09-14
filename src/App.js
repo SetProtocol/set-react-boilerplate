@@ -105,7 +105,7 @@ class App extends Component {
 
   renderEtherScanLink(link, content) {
     return (
-      <div>
+      <div className="App-button-container">
         <a target="_blank" rel="noopener" href={link}>
           {content}
         </a>
@@ -123,7 +123,7 @@ class App extends Component {
         <button onClick={this.createSet}>
           Create My Set
         </button>
-        { createdSetLink ? this.renderEtherScanLink(createdSetLink, 'Link to your new Set') : null}
+        { createdSetLink ? this.renderEtherScanLink(createdSetLink, 'Link to your new Set') : null }
       </div>
     );
   }
