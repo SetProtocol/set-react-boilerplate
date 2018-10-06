@@ -1,3 +1,5 @@
+<p align="center"><img src="https://s3-us-west-1.amazonaws.com/set-protocol/img/assets/set-protocol-logo.png" width="64" /></p>
+
 # Set React Boilerplate
 
 Bare bones template for getting up and running with Set.
