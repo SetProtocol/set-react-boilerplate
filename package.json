@@ -7,13 +7,14 @@
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-scripts": "1.1.5",
-    "setprotocol.js": "^1.0.0-alpha.27",
+    "setprotocol.js": "^1.0.4-rc.5",
     "web3": "0.20.7"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "set-chain": "set-chain"
   }
 }

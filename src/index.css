@@ -31,6 +31,7 @@ button {
   border-radius: 4px;
   box-shadow: 0 2px 4px 0 rgba(155, 151, 179, 0.25);
   display: inline;
+  margin: 10px;
   max-width: 300px;
   min-width: 300px;
   padding: 30px 40px;
@@ -45,4 +46,13 @@ button:hover {
 button:active {
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.07);
   transform: scale(1.03);
+}
+
+.button-disabled {
+  cursor: not-allowed;
+}
+
+.button-disabled:hover {
+  box-shadow: 0 2px 4px 0 rgba(155, 151, 179, 0.25);
+  transform: scale(1);
 }
