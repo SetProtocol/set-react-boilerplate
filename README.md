@@ -22,3 +22,9 @@ yarn start
 
 View your local server at `http://localhost:3000/`
 
+
+Start your own chain
+```
+yarn set-chain
+```
+
