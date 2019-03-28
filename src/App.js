@@ -3,6 +3,7 @@ import './App.css';
 
 import SetProtocol from 'setprotocol.js';
 import BigNumber from 'bignumber.js';
+import Web3 from 'web3';
 
 // Kovan configuration
 const config = {
@@ -15,25 +16,42 @@ const config = {
 class App extends Component {
   constructor() {
     super();
-    const injectedWeb3 = window.web3 || undefined;
-    let setProtocol;
-    try {
-      // Use MetaMask/Mist provider
-      const provider = injectedWeb3.currentProvider;
-      setProtocol = new SetProtocol(provider, config);
-    } catch (err) {
-      // Throws when user doesn't have MetaMask/Mist running
-      throw new Error(`No injected web3 found when initializing setProtocol: ${err}`);
-    }
-
     this.state = {
-      setProtocol,
-      web3: injectedWeb3,
+      setProtocol: null,
+      web3: null,
       // Etherscan Links
       createdSetLink: '',
     };
     this.createSet = this.createSet.bind(this);
     this.getAccount = this.getAccount.bind(this);
+  }
+
+  componentDidMount() {
+    if (!this.state.web3) {
+        this.requestWeb3Access();
+    }
+  }
+
+  async requestWeb3Access() {
+    let setProtocol, injectedWeb3;
+    if (window.ethereum) {
+      try {
+        injectedWeb3 = new Web3(window.ethereum);
+        await window.ethereum.enable();
+      } catch (err) {
+          console.error(`Unable to access web3: ${err.message}`);
+      }
+    }
+    else if (window.web3) {
+      injectedWeb3 = window.web3;
+    }
+    if (injectedWeb3) {
+      setProtocol = new SetProtocol(injectedWeb3.currentProvider, config);
+      this.setState((prevState) => ({ web3: injectedWeb3, setProtocol }));
+    } 
+    else {
+      console.error('Web3 provider not found.');
+    }
   }
 
   async createSet() {
@@ -99,8 +117,8 @@ class App extends Component {
 
   getAccount() {
     const { web3 } = this.state;
-    if (web3.eth.accounts[0]) return web3.eth.accounts[0];
-    throw new Error('Your MetaMask is locked. Unlock it to continue.');
+    if (web3 && web3.eth.accounts[0]) return web3.eth.accounts[0];
+    throw new Error('Unlock MetaMask or allow account access when prompted to continue.');
   }
 
   renderEtherScanLink(link, content) {
